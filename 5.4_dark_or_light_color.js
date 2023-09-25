@@ -2,8 +2,6 @@ let color =prompt('PLEASE enter a dsirable color:');
 let colorLowerCase = color.toLowerCase();
 let colorOfChoice= ['yellow', 'pink', 'orange', 'blue', 'purple', 'brown'];
 
-console.log(colorLowerCase);
-
 switch(colorLowerCase){
     case colorOfChoice[0]:
     case colorOfChoice[1]:
