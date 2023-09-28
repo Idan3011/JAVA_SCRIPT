@@ -24,25 +24,25 @@
 //     window.alert('Not a Valid letter')
 // }
 
-let testScore1 = prompt('Please enter your test score as a letter - (0-100)');
+let testScore1 = prompt('Please enter your test score as a number - (0-100)');
 
 if (testScore1 >= 0 && testScore1 <= 64) {
-    console.log('0-64 is a: "F"')
+    alert('0-64 is a: "F"')
 }
 else if (testScore1 >= 65 && testScore1 <= 69) {
-    console.log('65-69 is a: "D"')
+    alert('65-69 is a: "D"')
 }
 
 else if (testScore1 >= 70 && testScore1 <= 79) {
-    console.log('70-79 is a: "C"')
+    alert('70-79 is a: "C"')
 }
 
 else if (testScore1 >= 80 && testScore1 <= 89) {
-    console.log('80-89 is a: "B"')
+    alert('80-89 is a: "B"')
 }
 
 else if (testScore1 >= 90 && testScore1 <= 100) {
-    console.log('90-100 is a: "A"')
+    alert('90-100 is a: "A"')
 }
 
 else {
