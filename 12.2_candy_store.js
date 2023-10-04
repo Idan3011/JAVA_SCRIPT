@@ -56,3 +56,6 @@ getCandy(candyStore.candies,'jk5gh', 'loolipoop', 6);
 
 //console.log(candyStore.candies)
 
+function buyCandy(candyStore, id){
+    
+}
