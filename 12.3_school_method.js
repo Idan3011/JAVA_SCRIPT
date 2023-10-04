@@ -91,4 +91,4 @@ function assignTeachersSubject(teacherId, newSubject){
     return school.teachers
 }
 
-console.log(assignTeachersSubject(2, 'Math'))
+//console.log(assignTeachersSubject(2, 'Math'))
