@@ -17,4 +17,4 @@ console.log(getSum(arr1, arr2));
 
 // 2. i use DEBUG CONSOLE///
 
-// 3. arr1 & arr2 arn`t defined/////
+// 3. arr1 & arr2 arn`t defined, sum is const, there is no value to be return /////
