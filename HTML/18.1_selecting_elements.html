@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible"
+content="IE=edge" />
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0" />
+<title>Document</title>
+</head>
+<body>
+<h1>Header</h1>
+<p>Paragraph</p>
+<a href="#">link</a>
+<img src="" alt="" class="img"/>
+<div class="x">Div with a class</div>
+<div id="y">Div with an id</div>
+<input type="text" class="input1"/>
+<input type="text" class="input2"/>
+<input type="text" class="input3"/>
+</body>
+<script>
+const h = document.getElementsByTagName('h1');
+const p = document.getElementsByTagName('p');
+const a = document.getElementsByTagName('a');
+const img = document.getElementsByTagName('img');
+const x = document.getElementsByClassName('.x');
+const y = document.getElementById('#y');
+const input1 = document.getElementsByClassName('.input1')
+const input2 = document.getElementsByClassName('.input2');
+const input3 = document.getElementsByClassName('.input3');
+console.log(`${h}`)
+console.log(`${p}`)
+console.log(`${a}`)
+console.log(`${img}`)
+console.log(`${x}`)
+console.log(`${y}`)
+console.log(`${input1}`)
+console.log(`${input2}`)
+console.log(`${input3}`)
+let arr = [h, p, a, img, x, y, input1, input2, input3]
+const foreach = function ()  {
+    arr.forEach(element => {
+        console.log(element)
+    })
+
+}
+foreach()
+</script>
+</html>
