@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19.3 Copy Mulitple Inputs</title>
+    <link rel="stylesheet" href="./CSS/style.css"> 
+</head>
+<body>
+    <div id="text">Text To Copy: <div class="numbers">123456</div>
+</div>
+<div class="container">
+    <ul id="list">
+        <input type='text'  maxlength="1" class="fill">
+        <input type='text'  maxlength="1" class="fill">
+        <input type='text'  maxlength="1" class="fill">
+        <input type='text'  maxlength="1" class="fill">
+        <input type='text'  maxlength="1" class="fill">
+        <input type='text'  maxlength="1" class="fill">
+    </ul>
+        <button class="verify">Verify</button>
+</div>
+</body>
+<script>
+    const input = document.querySelectorAll('.fill');
+    
+    function focusOnNext(currentInput) {
+        const maxLength = parseInt(currentInput.getAttribute('maxlength'));
+        const nextVal = currentInput.nextElementSibling;
+        
+        if(currentInput.value.length >= maxLength && nextVal){
+            nextVal.focus()
+        }
+    }
+
+    function pasteIt(event){
+        const paste = event.clipboardData.getData('text/plain');
+        if(paste.length === 6){
+        for(let i=0; i<6; i++){
+            const currentInput = input[i];
+            currentInput.value = paste.charAt(i);
+            focusOnNext(currentInput)
+        }
+        }
+    }
+
+    input.forEach(element => {
+        element.addEventListener('input',focusOnNext)
+        element.addEventListener('paste', pasteIt)
+    })
+   
+    
+        
+      
+        
+
+    
+
+
+</script>
+</html>
