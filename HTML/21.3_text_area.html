@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.3 Text Area</title>
+    <style>
+        
+    *{
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        background: gray;
+}
+    .container {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+}
+    p {
+        margin-top: -8rem;
+        font-size: 1.5rem;
+        font-family: monospace;
+
+}
+    #text {
+        width: 34rem;
+        height: 7rem;
+        margin-left: 0rem;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: left;
+        background: #f3f3f3;
+}
+    .btn {
+        position: absolute;
+        top: 56.7%;
+        left: 33.1%;
+        transform: translate(-50%, -50%);
+        width: 7rem;
+        height: 2rem;
+        background: #333;
+        color: #f3f3f3;
+        font-size: 1.2rem;
+        cursor: pointer;
+}
+
+    .popup {
+        position: absolute;
+        top: 37%;
+        left: 49%;
+        transform: translate(-50%,-50%);
+        width: 18rem;
+        height: 13rem;
+        background: #ced1e5;
+        border-radius: 0.5rem;
+        display: none;
+}
+
+    .close{
+        position: absolute;
+        margin-left: 16.4rem;
+        margin-top: 0.4rem;
+        font-size: 1.5rem;
+        background: #ced1e5;
+        cursor: pointer;
+        border:none;
+}
+    .alert {
+        position: absolute;
+        font-size: 1.1rem;
+        top: 86%;
+        text-align: center;
+        background: #ced1e5;
+    }
+
+
+    </style>
+</head>
+    <div class="container">
+    <p>Why are you interested in this position?</p>
+    <textarea id="text" name="text" rows="4" cols="50"></textarea>
+    </div>
+    <button class="btn">Click Here!</button>
+    <div class="popup">
+        <p class="alert">Your request cannot be submitted. You must write at least 100 words.
+            Please try again</p class="alert">
+        <button class="close">X</button>
+        
+    </div>
+<body>
+    <script>
+        const text = document.querySelector('#text');
+        const btn = document.querySelector('.btn');
+        const popup = document.querySelector('.popup');
+        const close =document.querySelector('.close');
+        
+
+        btn.addEventListener('click', ()=>{
+            let textLength = parseInt(text.value.length);
+            if(textLength<100){
+                popup.style.display = 'block';
+                console.log(`${textLength}`)
+            }
+            else{
+                console.log(`${textLength}`)
+            }
+        })
+
+        close.addEventListener('click',() => {
+            if(close){
+                popup.style.display = 'none';
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
