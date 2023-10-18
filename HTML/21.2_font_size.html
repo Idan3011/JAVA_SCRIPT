@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.2 Font Size</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+        background-color: #5a9de3;
+}
+    p {
+        text-align: center;
+        font-size: 6px;
+        font-family: math;
+        position: absolute;
+        left: 50%;
+        top: 28%;
+        transform: translate(-50%, -50%);
+        line-height: 2.3rem;
+    }
+
+    .container {
+        font-size: 1.3rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+}   
+    .plus, .minus {
+        width: 4rem;
+        height: 4rem;
+        margin: 0 2rem;
+        text-align: center;
+        font-size: 2rem;
+        cursor: pointer;
+        border-radius: 4rem;
+        border: none;
+    }
+    </style>
+</head>
+<body>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio laborum quia temporibus, illo velit deleniti enim facilis. Minus magni quibusdam sunt dolor qui provident eius placeat doloribus est voluptate repellat, quis impedit repellendus et! Veniam?</p>
+    <div class="container">
+    <button class="plus" style="background: #1feb12">+</button>
+    <button class="minus" style="background: #b5d617">-</button>
+    </div>
+
+    <script>
+        const plus = document.querySelector('.plus');
+        const minus = document.querySelector('.minus');
+        const para = document.querySelector('p');
+        const container =document.querySelector('.container');
+        let counter = 6;
+        plus.addEventListener('click', ()=>{
+            if(plus && counter< 100){
+                counter ++
+                para.style.fontSize = `${counter}px`; 
+                console.log(counter) 
+            }
+        })
+        minus.addEventListener('click', () =>{
+            if(minus && counter> 6){
+                counter --;
+                para.style.fontSize = `${counter}px`
+                
+            }
+        })
+        
+
+
+    </script>
+</body>
+</html>
