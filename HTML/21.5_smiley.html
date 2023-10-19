@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.5 Smiley</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: #c1bdbd;
+        }
+
+        .container{
+            position: absolute;
+            left:50%;
+            top:31%;
+            transform: translate(-50%, -50%);
+            font-family: math;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+
+        .text {
+            width: 16rem;
+            height: 2rem;
+            font-size: 1.8rem;
+            background: #f3f3f3;
+        }
+
+        .submit {
+            position: absolute;
+            margin-left: 0.2rem;
+            width: 4rem;
+            height: 2rem;
+            font-family: math;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        img {
+            width: 10rem;
+            height: 10rem;
+            position: absolute;
+            left: 10%;
+            top: 60%;
+            transform: translate(-179%, -50% );
+            display: none;
+            width: 100%;
+            float: left;
+            
+        }
+
+        .popup {
+            position: absolute;
+            top: 33%;
+            left: 48%;
+            transform: translate(-50%,-50%);
+            width: 20rem;
+            height: 11rem;
+            background: #d12222;
+            border-radius: 1rem;
+            display: none;
+        }
+
+        .popup h3 {
+            position: absolute;
+            left: 2%;
+            top: 31%;
+            background: #d12222;
+        }
+
+        .close {
+            border: none;
+            background: #d12222;
+            margin-left: 18rem;
+            margin-top: 0.4rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>How many smiley do you want to see?</p>
+    <input type="text" class ='text'>
+    <button class="submit">Submit</button>
+    </div>
+    <img src="../PICS/smiley.png" alt="smiley-pic">
+    <div class="popup"><button class="close">X</button>
+    <h3>you didnt insert A number. please TRY AGAIN.</h3>
+    </div>
+    
+    
+    
+    <script>
+        const text = document.querySelector('.text');
+        const submit = document.querySelector('.submit');
+        const img = document.querySelector('img');
+        const popup =document.querySelector('.popup');
+        const close =document.querySelector('.close');
+        let newImg = new Image();
+        let textVal = 0;
+        
+        submit.addEventListener('click', () => {
+            
+             textVal = parseFloat(text.value);
+            let counter = 10;
+            let counterDown = 10;
+            if(textVal>0){
+                for(let i=0; i<textVal; i++){
+                        newImg = new Image();
+                        newImg.src = '../PICS/smiley.png';
+                        newImg.style.position = 'absolute';
+                        newImg.style.width = '10rem';
+                        newImg.style.height = '10rem';
+                        newImg.style.marginLeft += `${counter}rem`;
+                        document.body.appendChild(newImg);
+                        newImg.style.display = 'flex';
+                        counter += 10;
+                    }    
+        }  else{
+                        popup.style.display = 'block';
+                        popup.style.zIndex = 3;
+                }
+                       
+        })
+
+        close.addEventListener('click', () =>{
+            if(close){
+                popup.style.display = 'none';
+            }
+        })
+
+        text.addEventListener('keydown', (event) => {
+            
+        if(event.key === 'Backspace' && newImg){
+            const image = document.querySelectorAll('img')
+            image.forEach(element => {
+                document.body.removeChild(element);
+            newImg = new Image();
+            });
+            
+        } 
+
+    })
+
+    </script>
+</body>
+</html>
