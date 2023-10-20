@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22.1 Forms</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background: #c0baba;
+            font-family: math;
+        }
+
+        .container {
+            position: absolute;
+            top: 42%;
+            left: 48.5%;
+            transform: translate(-50%, -50%);
+            border: 0.05 solid black;
+            width: 14rem;
+            height: 23rem;
+            border: 0.2rem solid #333;
+            background: #f6ecd6;
+            border-radius: 0.5rem;
+            text-align: left;
+
+        }
+
+        .container form {
+            position: absolute;
+            background: #f6ecd6;
+            margin-top: -0.8rem;
+            margin-left: 1.7rem;
+            font-size: 1.2rem;
+            font-family: math;
+
+        }
+
+        h4 {
+            text-align: center;
+        }
+
+        #popup {
+            position: absolute;
+            left: 48%;
+            top: 29%;
+            transform: translate(-50%, -50%);
+            border: 0.1rem solid #333;
+            border-radius: 0.5rem;
+            width: 20rem;
+            height: 15rem;
+            background: #ddd6e3;
+            font-size: 1.1rem;
+            font-family: monospace;
+            text-align: left;
+            display: none;
+        }
+
+        #submit {
+            cursor: pointer;
+            margin-left: 4.8rem;
+            margin-top: 13rem;
+            background: #f6ecd6;
+
+        }
+
+        .close {
+            position: absolute;
+            margin-left: 18.2rem;
+            margin-top: 0.2rem;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        p {
+            margin-top: 1.7rem;
+            margin-left: 0.4rem;
+            position: absolute;
+        }
+
+        ul {
+            margin-top: 7rem;
+            list-style: none;
+            margin-left: -2rem;
+        }
+
+        .btns {
+            position: absolute;
+            margin-left: 3.7rem;
+            margin-top: -0.9rem;
+        }
+
+        .ok, .not-ok {
+            color:#f3f3f3;
+            background: green;
+            width: 6rem;
+            height: 2.5rem;
+            font-size: 1rem;
+            font-family: math;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+        }
+
+        .confirm {
+            position: absolute;
+            top: 13%;
+            left: 42%;
+            border: 0.1rem solid #333;
+            border-radius: 0.5rem;
+            width: 10rem;
+            height: 7rem;
+            background: #f3f3f3;
+            padding-top: 1.5rem;
+            display: none;
+        }
+
+        .close1 {
+            position: absolute;
+            top: 3%;
+            left: 87%;
+            border-style: none;
+            font-size: 1.3rem;
+            font-family: math;
+            background: #f3f3f3;
+            padding: 0;
+            cursor: pointer;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4>Form</h4>
+        <form>
+            <lable for="fname">First Name:</lable><br>
+            <input type="text" id="fname" name="fname" placeholder="First name..."><br>
+            <lable for="lname">Last Name:</lable><br>
+            <input type="text" id="lname" name="lname" placeholder="Last name..."><br>
+            <lable for="age">Your Age:</lable><br>
+            <input type="number" id="age" name="age" placeholder="Your age..."><br>
+            <lable for="email">Your Email:</lable><br>
+            <input type="email" id="email" name="email" placeholder="Your Email..."><br>
+        </form>
+        <button  id="submit" >Submit</button>
+    </div>
+    <div id="popup"><button class="close">X</button>
+        <p>Before you submit, please verify that this is you correct information:</p>
+        <ul>
+        <li>Your first name is: <div class="finput"></div></li>
+        <li>Your Last name is: <div class="linput"></div></li>
+        <li>Your Age is: <div class="ainput"></div></li>
+        <li>Your Email is: <div class="einput"></div></li>
+        </ul>
+        <div class="btns">
+        <button id="ok" style="background: green;">Confirm</button>
+        <button id="not-ok" style="background: red;">Try Again!</button>
+        
+        </div>
+    </div>
+        <div class="confirm">
+            congratulations you successfully sent this form
+            <button class="close1">X</button>
+        </div>
+
+    <script>
+        const fname = document.querySelector('#fname');
+        const lname = document.querySelector('#lname');
+        const age = document.querySelector('#age');
+        const email = document.querySelector('#email');
+        const submit = document.querySelector('#submit');
+        const popup = document.querySelector('#popup');
+        const ok = document.querySelector('#ok');
+        const notOk = document.querySelector('#not-ok');
+        const close = document.querySelector('.close');
+        const finput =document.querySelector('.finput');
+        const linput =document.querySelector('.linput');
+        const ainput =document.querySelector('.ainput');
+        const einput =document.querySelector('.einput');
+        const form = document.querySelector('.form');
+        const confirm1 = document.querySelector('.confirm');
+        const close1 = document.querySelector('.close1');
+        
+
+        submit.addEventListener('click', () => {
+            let userAge = parseInt(age.value);
+            let userFirst = fname.value;
+            let userLast = lname.value;
+            let userEmail = email.value;
+            if(fname && lname && userAge && email) {
+                popup.style.display = 'block';
+                finput.innerHTML = `${userFirst}`;
+                linput.innerHTML = `${userLast}`;
+                ainput.innerHTML = `${userAge}`;
+                einput.innerHTML = `${userEmail}`;
+                popup.style.height = '21rem';
+                popup.style.top = '38%';
+            }
+        })
+
+        close.addEventListener('click', () => {
+            if(close){
+                popup.style.display = 'none';
+            }
+        })
+
+        ok.addEventListener('click', () => {
+            if(ok){
+                confirm1.style.display = 'block';
+            }
+        })
+
+        notOk.addEventListener('click', () => {
+            if(notOk){
+                age.value = '';
+                fname.value = '';
+                lname.value = '';
+                email.value = '';
+                popup.style.display = 'none';
+
+            }
+        })
+
+        close1.addEventListener('click', () => {
+            if(close){
+                confirm1.style.display = 'none';
+            }
+        })
+
+    </script>
+</body>
+</html>
