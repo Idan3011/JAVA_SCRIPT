@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Race 🏎</title>
+    <style>
+        .racer_table {
+    margin: auto;
+  }
+  
+  td {
+    height: 40px;
+    width: 50px;
+    border: 1px solid whitesmoke;
+  }
+  
+  td.active {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+  }
+  
+  #player1-race > td.active {
+    background-image: url(../PICS/player_1.png);
+  }
+  
+  #player2-race td.active {
+    background-image: url(../PICS/player_2.png);
+  }
+  
+  td:last-child {
+    background-image: url(../PICS/finish.png);
+    background-size: cover;
+  }
+  
+  td:last-child.active {
+    background-size: 90%, cover;
+    background-position: center, top left;
+  }
+  
+  #player1-race td:last-child.active {
+    background-image: url(../PICS/player_1.png), url(../PICS/finish.png);
+  }
+  
+  #player2-race td:last-child.active {
+    background-image: url(../PICS/player_2.png), url(../PICS/finish.png);
+  }
+
+  .popup {
+    position: absolute;
+    left: 41%;
+    top: 34%;
+    width: 12rem;
+    height: 9rem;
+    background: #e4d8d8a3;
+    border-radius: 0.5rem;
+    display: none;
+  }
+
+  .close {
+    position: absolute;
+    border-style: none;
+    cursor: pointer;
+    left: 80%;
+    font-size: 1.4rem;
+    top: 3%;
+    background: initial;
+  }
+
+  h4 {
+    position: absolute;
+    top: 25%;
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.3rem;
+  }
+
+  .again {
+    top: 81%;
+    left: 25%;
+    background: initial;
+    position: absolute;
+    border-radius: 3.5rem;
+    font-family: cursive;
+    cursor: pointer;
+    z-index: 3;
+  }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <h1 class="text-center">Race</h1>
+    </div>
+    <hr />
+    <!-- You race HTML code here -->
+    <table class="racer-table">
+      <tr id="player1-race">
+        <td class="active"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="finish"></td>
+      </tr>
+      <tr id="player2-race">
+        <td class="active"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="finish"></td>
+      </tr>
+    </table>
+    <hr />
+    <div class="popup"><button class="close">X</button><h4></h4><button class="again">PLAY AGAIN</button></div>
+  </body>
+  <script >
+    const player1Race = document.querySelectorAll('#player1-race td');
+    const player2Race = document.querySelectorAll('#player2-race td');
+    const finish1 = document.querySelector('.finish');
+    const popup = document.querySelector('.popup');
+    const close = document.querySelector('.close');
+    const palyAgain = document.querySelector('.again');
+    const text = document.querySelector('h4');
+    let counter1 = 0;
+    let counter2 = 0;
+
+    document.body.addEventListener('keyup', (event) => {
+        player1position(event.key);
+        player2position(event.key);
+        winner(counter1,counter2);
+        
+    })
+
+    close.addEventListener('click', () => {
+        if(close){
+            popup.style.display = 'none';
+        }
+    })
+
+    palyAgain.addEventListener('click',() => {
+      if(palyAgain){
+        window.location.reload()
+      }
+    })
+
+    function player1position(val){
+                    
+            if(val === 'ArrowRight') {
+                if(counter1<10){
+                player1Race[counter1+1].className = player1Race[counter1+1].className.replace("", "active");
+                player1Race[counter1].className = player1Race[counter1].className.replace("active", "");
+                counter1++
+
+            }  else{
+                player1Race[counter1+1].className = player1Race[counter1+1].className.replace('finish', 'active');
+                player1Race[counter1].className = player1Race[counter1].className.replace('active', '');
+                counter1++
+            }
+            console.log(counter1)
+
+        }
+    }
+    
+    function player2position(val){
+                    
+            if(val === 'd') {
+                if(counter2<10){
+                player2Race[counter2+1].className = player2Race[counter2+1].className.replace("", "active");
+                player2Race[counter2].className = player2Race[counter2].className.replace("active", "");
+                counter2++
+            }  else{
+                player2Race[counter2+1].className = player2Race[counter2+1].className.replace('finish', 'active');
+                player2Race[counter2].className = player1Race[counter2].className.replace('active', '');
+                counter2++
+
+            }
+        }     
+    }
+
+    function winner(cnt1, cnt2){
+      if(cnt1 || cnt2) {
+     if(cnt1>10 && cnt2 !=11 ){
+      popup.style.display = 'block';
+      text.innerText = 'PLAYER ONE IS THE WINNER!!';
+      
+     } else if(cnt2 >10 && cnt1 !=11){
+      popup.style.display = 'block';
+      text.innerText = 'PLAYER TWO IS THE WINNER!!';
+     } 
+     return;
+
+    }
+    }
+</script>
+</html>
