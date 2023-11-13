@@ -11,3 +11,4 @@ console.log(getSumOfEven(arr));
 // 1. the return index arent the even numbers & arr insnt declare///
 
 // 2. i use DEABUG CONSOL.E.///
+
