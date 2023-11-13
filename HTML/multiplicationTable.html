@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication table</title>
+    <style type="text/css">
+        table,th,td {
+            border: 1px solid blue;
+            border-collapse: collapse;
+        }
+        th,td {
+            width: 50px;
+            font-size: 25px;
+        }
+        th {
+            color:green;
+        }
+
+        td:hover {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <table id="mytable">
+
+    </table>
+
+    <script type="text/javascript">
+        var table = document.getElementById('mytable');
+        var outpot = '';
+        for(var i=1; i<=10; i++){
+            outpot +='<tr>'
+            for(var j=1; j<=20; j++){
+                if(i==1 && j==1)
+                outpot += '<th>&times;</th>';
+                else
+               {
+                    if(i==1 || j==1)
+                        outpot += '<th>'+i*j+'</th>'
+                    else
+                        outpot +="<td>"+i*j+'</td>'
+               }
+                
+            }
+            outpot += '</tr>'
+        }
+        table.innerHTML = outpot;
+    </script>
+</body>
+</html>
