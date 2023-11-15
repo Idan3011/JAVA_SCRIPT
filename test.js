@@ -36,15 +36,29 @@ function isPrime(element) {
 
 var w = [1,2,0,0,0,0,5,7,-6,0,0,0,8,0,0];
 
+const x = (w) => {
+  for(let i=0; i<=w.length; i++){
+  while((w[i] == 0 && w[i+1]==0)){
+    w.splice(i+1,1);
+  } 
+}
+return w
 
+}
 
-var x = w.filter((a,b) =>{
+// console.log(x(w))
 
-  if(w.indexOf(a, 0) !== w.lastIndexOf(a, 0)){
-    return w
-    
-  }
+var w = [6, 7, 4, 3, 5, 2];
 
-})
-console.log(x)
+function replaceWithNextMax(arr){
+     let array = arr.map((previousValue, currentValue) => {
+        if(previousValue< currentValue){
+          previousValue = currentValue
+        } 
+      })
+      return array
+}
+var n = replaceWithNextMax(w);
+console.log(n); //print [7, 5, 5, 5, 2, 0]
+
 
