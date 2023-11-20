@@ -17,4 +17,5 @@ Pokemon.prototype.atteck = function(n){
     console.log(`${this.name} used ${this.attackList[n]}`);
 }
 
-charmander.atteck(0)
+// charmander.atteck(0)
+

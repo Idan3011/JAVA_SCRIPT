@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub API</title>
+    <style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        background: rgb(224 224 219);
+    }
+
+    #search-form {
+        position: absolute;
+        left: 46%;
+        top: 7%;
+        text-align: center;
+        width: 11rem;
+        height: 3rem;
+    }
+
+    #search-bar{
+        width: 10rem;
+        height: 1.3rem;
+        letter-spacing: 0.05rem;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 0.7rem;
+    }
+
+    #submit {
+        border: none;
+    background: #6969a5;
+    border-radius: 0.5rem;
+    width: 5rem;
+    height: 2rem;
+    top: 3%;
+    position: relative;
+    top: 9%;
+    font-size: 1.1rem;
+    font-family: fantasy;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    }
+    #submit:hover {
+        background-color: #8d8db5;
+        transform: scale(105%,103%);
+        transition: 0.1s;
+        text-align: center;
+
+    }
+
+    #users-card {
+        position: absolute;
+        display: grid;
+        width: 96%;
+        min-height: 66vh;
+        grid-column-start: repeat(20, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        top: 20%;
+        row-gap: 3.1rem;
+        column-gap: 1.1rem;
+        left: 2%;
+    }
+
+    .user-card{
+        display: flex;
+    width: 11rem;
+    height: 10rem;
+    flex-direction: column;
+    border: 0.1rem solid black;
+    justify-content: space-around;
+    }
+    
+    p {
+        text-align: left;
+        font-size: 1.1rem;
+        color:black;
+    }
+    .userImg {
+        width: 7rem;
+        height: 5rem;
+
+    } 
+
+    </style>
+</head>
+<body>
+    <form id="search-form">
+    <input type="search" id="search-bar" name="search" placeholder="Search GitHub User..."><br>
+   <input type="submit" name="search" id="submit" value="SEARCH">
+    </form>
+    <div id="users-card"></div>
+    
+</body>
+<script>
+    const searchForm = document.getElementById('search-form');
+    const searchBar = document.getElementById('search-bar');
+    const usersCard = document.getElementById('users-card');
+    const submitInput = document.getElementById('submit');
+
+
+    const url = 'https://api.github.com/users';
+
+        
+
+        const fetchUser = async() => {
+            try{
+                const result = await fetch(url+`/${searchBar.value}`);
+
+                if(!result.ok){
+                    throw new Error(`Faild to fetch data. status: ${result.status}`);
+                }
+
+
+                const res = await result.json();
+                console.log("res value is:",res);
+                renderUser(res)
+            } catch(err){
+                console.error(err)
+            }
+        }
+
+        fetchUser()
+
+    const renderUser = (user) => {
+            const userCard = document.createElement('button');
+            userCard.classList.add('user-card');
+            usersCard.appendChild(userCard);  
+            const userName = document.createElement('h2');
+            userName.textContent = `UserName: ${user.name}`;
+            userCard.appendChild(userName);
+            const userImg = document.createElement('img');
+            userImg.classList.add('userImg')
+            userImg.src = user.avatar_url
+            userImg.alt = user.name;
+            userCard.appendChild(userImg); 
+            const userRepo = document.createElement('p');
+            userRepo.textContent = 'user Repo: '+ ` ${user.public_repos}`
+             userCard.appendChild(userRepo)
+             userCard.addEventListener('click', () =>{
+                if(userCard){
+                    window.open = (user.html_url,'_blank')
+                }
+             })
+            }
+
+        searchForm.addEventListener('submit',async(e) =>{
+            e.preventDefault()
+            fetchUser()
+            searchBar.value = ''
+        })
+
+
+</script>
+</html>
