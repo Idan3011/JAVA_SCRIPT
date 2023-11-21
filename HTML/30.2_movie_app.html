@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: rgb(224 224 219);
+        }
+    
+        #search-form {
+            position: absolute;
+            left: 46%;
+            top: 7%;
+            text-align: center;
+            width: 11rem;
+            height: 3rem;
+        }
+    
+        #search-bar{
+            width: 10rem;
+            height: 1.3rem;
+            letter-spacing: 0.05rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 0.7rem;
+        }
+    
+        #submit {
+            border: none;
+        background: #6969a5;
+        border-radius: 0.5rem;
+        width: 5rem;
+        height: 2rem;
+        top: 3%;
+        position: relative;
+        top: 9%;
+        font-size: 1.1rem;
+        font-family: fantasy;
+        letter-spacing: 0.1rem;
+        cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #8d8db5;
+            transform: scale(105%,103%);
+            transition: 0.1s;
+            text-align: center;
+    
+        }
+    
+        #movie-card {
+            position: absolute;
+            display: flex;
+            width: 28%;
+            min-height: 66vh;
+            grid-column-start: repeat(20, 1fr);
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            top: 20%;
+            row-gap: 3.1rem;
+            column-gap: 1.1rem;
+            left: 37%;
+            flex-direction: column;
+            overflow: hidden;
+           
+        }
+        .movies-card {
+            border: 0.1rem solid black;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    
+        .movie-card{
+        display: flex;
+        width: 11rem;
+        height: 10rem;
+        flex-direction: column;
+        border: 0.1rem solid black;
+        justify-content: space-around;
+        }
+        
+        p {
+            text-align: left;
+            font-size: 1.1rem;
+            color:black;
+        }
+        .userImg {
+            width: 7rem;
+            height: 5rem;
+    
+        } 
+
+        img {
+            width: 100%;
+            padding: 1.1rem 1.1rem;
+            border-radius: 2rem;
+        }
+
+        .section{
+            padding: 0 6rem;
+            width: 100%;
+        }
+   
+        
+    </style>
+    </head>
+<body>
+    <form id="search-form">
+    <input type="search" id="search-bar" name="search" placeholder="Search GitHub User..."><br>
+   <input type="submit" name="search" id="submit" value="SEARCH">
+    </form>
+    <div id="movie-card"></div>
+
+    <script> const searchForm = document.getElementById('search-form');
+        const searchBar = document.getElementById('search-bar');
+        const moviesCard = document.getElementById('movie-card');
+        const submitInput = document.getElementById('submit');
+
+        url ='https://www.omdbapi.com/?t='
+
+        const fetchMovie = async() => {
+            try{
+                const result = await fetch(url +`${searchBar.value}` + '/&apikey=aaa46d9d');
+                console.log(result)
+                if(!result.ok){
+                    throw new Error(`Faild to fetch data. status: ${result.status}`)
+                }
+                const res = await result.json();
+                console.log('res is:', res);
+                movieRender(res)
+            }catch(err){
+                console.log(err);
+            }
+        }        
+        
+        const movieRender = (movie) =>{
+            moviesCard.innerHTML = ''
+            const movieCard = document.createElement('div');
+            
+            moviesCard.appendChild(movieCard);
+
+            const moviePoster = document.createElement('img');
+            moviePoster.src = movie.Poster;
+            moviePoster.alt = movie.title
+            moviePoster.classList.add('img')
+            movieCard.appendChild(moviePoster)
+
+            const movieTitle = document.createElement('h3');
+            movieTitle.textContent = movie.Title
+            movieTitle.classList.add('section')
+            movieCard.appendChild(movieTitle);
+
+
+            const movieGenre = document.createElement('p');
+            movieGenre.textContent = `Genre: ${movie.Genre}`
+            movieGenre.classList.add('section')
+
+            movieCard.appendChild(movieGenre);
+
+            const movieYear = document.createElement('p');
+            movieYear.textContent =`Year of release: ${movie.Year}`
+            movieYear.classList.add('section')
+            
+            movieCard.appendChild(movieYear);
+
+            const moviePlot = document.createElement('p');
+            moviePlot.textContent = `Movie Plot: ${movie.Plot}`
+            moviePlot.classList.add('section')
+
+            movieCard.appendChild(moviePlot);
+
+            const movieDirector = document.createElement('p');
+            movieDirector.textContent = `Movie Director: ${movie.Director}`
+            movieDirector.classList.add('section')
+
+            movieCard.appendChild(movieDirector);
+
+            const movieActors = document.createElement('p');
+            movieActors.textContent = `Actors: ${movie.Actors} `
+            movieActors.classList.add('section')
+
+            movieCard.appendChild(movieActors);
+
+           let  movieRating = movie.Ratings;
+                movieRating.forEach(rate =>{
+                    const movierate = document.createElement('p');
+                    movierate.textContent = `Source: ${rate.Source}: , Value: ${rate.Value}`
+                    movieCard.appendChild(movierate)
+                    movierate.classList.add('section')
+
+                })
+               
+                moviesCard.classList.add('movies-card')
+            
+        }
+
+        searchForm.addEventListener('submit', async(e) =>{
+            e.preventDefault();
+            fetchMovie();
+            searchBar.value =''
+        })
+
+        </script>
+    
+</body>
+</html>
